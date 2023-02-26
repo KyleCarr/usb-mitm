@@ -1,0 +1,39 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "configurations": [
+        {
+            "name": "Linux",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}",
+                    "/usr/lib/modules/6.0.12-00858-gb98721ea4575/build/arch/arm64/include/",
+                    "/usr/lib/modules/6.0.12-00858-gb98721ea4575/build/include/",
+                    "/usr/lib/modules/6.0.12-00858-gb98721ea4575/build/include/generated/",
+                   "/usr/lib/modules/6.0.12-00858-gb98721ea4575/build/arch/arm64/include/asm/",
+                   "/usr/lib/modules/6.0.12-00858-gb98721ea4575/build/arch/arm64/include/generated/uapi/asm/"
+
+                ], 
+                "limitSymbolsToIncludedHeaders": false
+            },
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/lib/modules/6.0.12-00858-gb98721ea4575/build/arch/arm64/include/",
+                "/usr/lib/modules/6.0.12-00858-gb98721ea4575/build/include/",
+                "/usr/lib/modules/6.0.12-00858-gb98721ea4575/build/include/generated/",
+                "/usr/lib/modules/6.0.12-00858-gb98721ea4575/build/arch/arm64/include/asm/",
+                "/usr/lib/modules/6.0.12-00858-gb98721ea4575/build/arch/arm64/include/generated/uapi/asm/"
+
+                
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-arm"
+        }
+    ], 
+    "version": 4
+   
+}
