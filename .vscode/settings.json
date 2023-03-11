@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "gadgetfs.h": "c",
+        "usbdevice_fs.h": "c"
+    }
+}
