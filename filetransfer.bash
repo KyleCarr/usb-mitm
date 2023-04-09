@@ -9,12 +9,17 @@ for FILE in /mnt/mydrive/*; do
     cp "$FILE" /file_holder
 done
 
+wget -q --spider http://google.com
+
+if [ $? -eq 0 ]; then
 IFS=$'\n'
 for FILE in $(ls -S /file_holder/*); do
     fileSize=$(wc -c "$FILE" | awk '{print $1}')
     if [[ $fileSize -lt $maxSize ]] 
     then
         sshpass -p "$password" scp "$FILE" "$username"@"$IP":~/files
-        rm -rf "$FILE"
+        
 fi
 done
+rm -rf /file_holder/*
+fi
