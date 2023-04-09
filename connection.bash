@@ -49,7 +49,7 @@ echo $FILE > functions/mass_storage.usb0/lun.0/file
 ln -s functions/mass_storage.usb0 configs/c.1/
 # End functions
 ls /sys/class/udc > UDC
-sh /home/ubuntu/usb-mitm/filetransfer.bash
+bash /home/ubuntu/usb-mitm/filetransfer.bash
 }
 
 check_connection(){
@@ -78,7 +78,7 @@ then
 elif [[ $status == "" && $connected == true ]]
     then
         connected=false
-        sh /home/ubuntu/usb-mitm/disconnect.bash
+        bash /home/ubuntu/usb-mitm/disconnect.bash
         echo "device has been disconnected"
 elif [[ $status != "" && $connected == true ]]
     then
