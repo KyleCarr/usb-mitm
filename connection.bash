@@ -1,5 +1,13 @@
 #!/bin/bash
+checkUsb(){
+usb=$(lsusb | head -1)
 
+if [[ $usb == *"USB DISK 3.0"* ]]; then
+  echo "3"
+else
+    echo "2"
+    fi
+}
 
 
 establish_connection(){
@@ -11,15 +19,16 @@ modprobe g_mass_storage
 cd /sys/kernel/config/usb_gadget/
 mkdir -p usbMitm
 cd usbMitm
-echo 0x1d6b > idVendor # Linux Foundation
-echo 0x0104 > idProduct # Multifunction Composite Gadget
+IFS=: read -r vendor product <<< $(lsusb | head -1 | cut -d ' ' -f 6)
+USB=$(checkUsb)
+echo 0x"$vendor" > idVendor 
+echo 0x"$product" > idProduct 
 echo 0x0100 > bcdDevice # v1.0.0
-echo 0x0200 > bcdUSB # USB2
-
+echo 0x0"$USB"00 > bcdUSB # USB3
 mkdir -p strings/0x409
-echo "Test" > strings/0x409/serialnumber
-echo "Test" > strings/0x409/manufacturer
-echo "Test" > strings/0x409/product
+echo "$vendor:$product" > strings/0x409/serialnumber
+echo "$vendor" > strings/0x409/manufacturer
+echo "$product" > strings/0x409/product
 mkdir -p configs/c.1/strings/0x409
 echo "Config 1: ECM network" > configs/c.1/strings/0x409/configuration
 echo 250 > configs/c.1/MaxPower
@@ -34,10 +43,13 @@ echo 1 > functions/mass_storage.usb0/stall
 echo 0 > functions/mass_storage.usb0/lun.0/cdrom
 echo 0 > functions/mass_storage.usb0/lun.0/ro
 echo 0 > functions/mass_storage.usb0/lun.0/nofua
+echo 1 > functions/mass_storage.usb0/lun.0/removable
+echo "USB DISK "$USB".0" > functions/mass_storage.usb0/lun.0/inquiry_string
 echo $FILE > functions/mass_storage.usb0/lun.0/file
 ln -s functions/mass_storage.usb0 configs/c.1/
 # End functions
 ls /sys/class/udc > UDC
+bash /home/ubuntu/usb-mitm/filetransfer.bash
 }
 
 check_connection(){
@@ -66,12 +78,13 @@ then
 elif [[ $status == "" && $connected == true ]]
     then
         connected=false
-        sh /home/ubuntu/usb-mitm/disconnect.bash
+        bash /home/ubuntu/usb-mitm/disconnect.bash
         echo "device has been disconnected"
-        
+elif [[ $status != "" && $connected == true ]]
+    then
+        echo "device is connected"
 else
-    echo "device is connected"
-    sleep 1
+    echo "device is disconnected"
 fi
 done
 
