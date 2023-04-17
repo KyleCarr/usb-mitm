@@ -1,28 +1,28 @@
 
 
-This Project is built using C11 and the gcc compiler
+This Project is built using Bash
+
+This project has been built and tested with the Libre AML-S905X-CC (Le Potato), and is specifically built for it. Modifications can be made for it to support other boards
 
 ## Commands to run project
-Run this command in the terminal of the Libre potato to get access to the correct C headers for code compilation:
-`sudo apt install linux-headers-generic`
+run this command to make the connection.bash file executable
+`chmod 774 connection.bash`
 
-to compile the code and get the output file, open the terminal and run the following command within the project directory:
-`make`
+run this command to make the disconnect.bash file executable
+`chmod 774 disconnect.bash`
 
-Load the module into the kernel using the following command:
-`sudo insmod Main.ko`
+run this command to make the filetransfer.bash file executable
+`chmod 774 filetransfer.bash` 
 
-view module info using this command:
-`modinfo Main.ko`
+to run the application normally, run the following command
+`sudo ./connection.bash`
 
-View the Kernel log messages using the following command:
-`tail /var/log/kern.log`
+to run the application as a system service and have it run on boot, run the following commands
+`sudo systemctl daemon-reload`
+`sudo systemctl enable usbMitm.service`
 
-Remove module from kernel with the following command:
-`sudo rmmod Main`
-## Reccomended Extensions
-- C/C++
-- CMake
-- Github Pull Requests and Issues
-- Prettier
-- Embedded Linux Kernel Dev
+you can check if the application is running with the following command
+`sudo systemctl is-enabled usbMitm.service`
+
+you can turn off the application with the following command
+`sudo systemctl stop usbMitm.service`
