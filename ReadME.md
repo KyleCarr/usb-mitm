@@ -2,7 +2,7 @@
 
 This Project is built using Bash
 
-This project has been built and tested with the Libre AML-S905X-CC (Le Potato), and is specifically built for it. Modifications can be made for it to support other boards
+This project has been built and tested with the Libre AML-S905X-CC (Le Potato) on ubuntu 6.0.19, and is specifically built for it. Modifications can be made for it to support other boards
 
 ## Commands to run project
 run this command to make the connection.bash file executable
