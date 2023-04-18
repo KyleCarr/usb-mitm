@@ -45,7 +45,7 @@ echo 0 > functions/mass_storage.usb0/lun.0/ro
 echo 0 > functions/mass_storage.usb0/lun.0/nofua
 echo 1 > functions/mass_storage.usb0/lun.0/removable
 echo "USB DISK "$USB".0" > functions/mass_storage.usb0/lun.0/inquiry_string
-echo $FILE > functions/mass_storage.usb0/lun.0/file
+echo $FILE > functions/mass_storage.usb0/lun.0/filespo
 ln -s functions/mass_storage.usb0 configs/c.1/
 # End functions
 ls /sys/class/udc > UDC
